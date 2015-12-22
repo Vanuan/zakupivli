@@ -109,6 +109,7 @@ am_tender <- function(filename){
 }
 
 am_winners <- apply(as.matrix(am_files[1:length(am_files)]), MARGIN = 1, FUN=am_tender)
+am_winners <- Filter(Negate(is.null), am_winners) # it's important to filter out NULLs
 am_winners <- Reduce(function(...) merge(..., all=T), am_winners)
 
 write.csv(file="drz_am.csv", x=am_winners)
